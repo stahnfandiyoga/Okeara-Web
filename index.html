@@ -272,6 +272,59 @@
             padding: 132px 0 76px;
             overflow: hidden;
             border-bottom: 1px solid rgba(197, 215, 224, .85);
+            background: #f7fbfc;
+            isolation: isolate;
+        }
+
+        .hero-photo {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 74% center;
+            transform: scale(1.01) translate3d(0, 0, 0);
+            animation: heroPan 16s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+
+        .hero-splash,
+        .hero-lemon-glow {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .hero-splash {
+            right: clamp(12px, 7vw, 110px);
+            bottom: clamp(118px, 17vw, 230px);
+            width: clamp(190px, 21vw, 320px);
+            aspect-ratio: 1.8 / 1;
+            background:
+                radial-gradient(circle at 72% 35%, rgba(255, 255, 255, .9) 0 3px, transparent 4px),
+                radial-gradient(circle at 42% 22%, rgba(255, 255, 255, .74) 0 4px, transparent 5px),
+                radial-gradient(circle at 24% 62%, rgba(182, 222, 238, .48) 0 5px, transparent 7px),
+                radial-gradient(ellipse at 58% 55%, rgba(255, 255, 255, .38), rgba(161, 204, 221, .16) 48%, transparent 72%);
+            filter: blur(.2px);
+            opacity: .75;
+            animation: splashLift 3.8s ease-in-out infinite;
+        }
+
+        .hero-lemon-glow {
+            right: clamp(315px, 30vw, 455px);
+            bottom: clamp(74px, 9vw, 128px);
+            width: clamp(110px, 12vw, 178px);
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 241, 154, .38) 0%, rgba(255, 237, 140, .16) 42%, transparent 70%);
+            animation: lemonPulse 4.2s ease-in-out infinite;
+            mix-blend-mode: screen;
         }
 
         .hero::before {
@@ -279,24 +332,28 @@
             position: absolute;
             inset: 0;
             background:
-                linear-gradient(90deg, rgba(255, 255, 255, .98) 0%, rgba(250, 253, 254, .88) 38%, rgba(225, 238, 245, .62) 100%),
-                radial-gradient(circle at 74% 48%, rgba(255, 255, 255, .18), transparent 20rem);
-            z-index: -3;
+                linear-gradient(90deg, rgba(255, 255, 255, .88) 0%, rgba(255, 255, 255, .7) 34%, rgba(255, 255, 255, .08) 60%, rgba(255, 255, 255, 0) 100%),
+                linear-gradient(180deg, rgba(255, 255, 255, .2) 0%, rgba(255, 255, 255, 0) 48%, rgba(238, 248, 251, .2) 100%);
+            z-index: 1;
+            pointer-events: none;
         }
 
         .hero::after {
             content: "";
             position: absolute;
-            right: -110px;
-            top: -80px;
-            width: 520px;
-            height: 520px;
-            background: radial-gradient(circle, rgba(194, 217, 228, .62) 0%, rgba(255, 255, 255, 0) 64%);
-            z-index: -2;
-            filter: blur(2px);
+            inset: 0;
+            background:
+                linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, .18) 42%, rgba(255, 255, 255, .55) 50%, rgba(255, 255, 255, .16) 58%, transparent 100%);
+            opacity: .38;
+            transform: translateX(-34%);
+            animation: heroGleam 9s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
         }
 
         .hero-grid {
+            position: relative;
+            z-index: 2;
             width: min(1320px, calc(100% - 56px));
             margin: 0 auto;
             display: grid;
@@ -393,6 +450,7 @@
         }
 
         .hero-orb {
+            display: none;
             position: absolute;
             inset: 42px 12px 28px 10px;
             border-radius: 42% 58% 45% 55% / 53% 38% 62% 47%;
@@ -405,6 +463,7 @@
         }
 
         .hero-ice {
+            display: none;
             position: relative;
             width: min(100%, 650px);
             aspect-ratio: 1.28 / 1;
@@ -425,24 +484,25 @@
             backdrop-filter: blur(18px);
             box-shadow: var(--soft-shadow);
             color: var(--navy);
-            font-size: 12px;
+            font-size: 15px;
             font-weight: 800;
             letter-spacing: .14em;
             text-transform: uppercase;
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 16px;
+            padding: 16px 24px;
         }
 
         .hero-badge {
-            left: 2%;
-            bottom: 18%;
+            left: auto;
+            right: 46%;
+            bottom: 37%;
         }
 
         .hero-chip {
-            right: 3%;
-            top: 18%;
+            right: 2%;
+            top: 38%;
         }
 
         .bubbles {
@@ -506,6 +566,62 @@
             }
         }
 
+        @keyframes heroPan {
+            0% {
+                transform: scale(1.01) translate3d(-.35%, 0, 0);
+            }
+
+            100% {
+                transform: scale(1.025) translate3d(.35%, -.35%, 0);
+            }
+        }
+
+        @keyframes splashLift {
+
+            0%,
+            100% {
+                transform: translate3d(0, 0, 0) scale(1);
+                opacity: .55;
+            }
+
+            50% {
+                transform: translate3d(-8px, -12px, 0) scale(1.06);
+                opacity: .9;
+            }
+        }
+
+        @keyframes lemonPulse {
+
+            0%,
+            100% {
+                transform: translate3d(0, 0, 0) scale(.96);
+                opacity: .32;
+            }
+
+            50% {
+                transform: translate3d(8px, -4px, 0) scale(1.1);
+                opacity: .68;
+            }
+        }
+
+        @keyframes heroGleam {
+
+            0%,
+            38% {
+                transform: translateX(-42%);
+                opacity: 0;
+            }
+
+            56% {
+                opacity: .34;
+            }
+
+            100% {
+                transform: translateX(42%);
+                opacity: 0;
+            }
+        }
+
         .waterline {
             position: absolute;
             left: 0;
@@ -516,7 +632,7 @@
                 linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(220, 235, 242, .82) 100%),
                 repeating-linear-gradient(175deg, rgba(47, 89, 113, .12) 0 1px, transparent 1px 18px);
             opacity: .85;
-            z-index: -1;
+            z-index: 1;
         }
 
         section {
@@ -892,6 +1008,10 @@
             display: block;
         }
 
+        .benefit-media img.beauty-head-safe {
+            object-position: center 28%;
+        }
+
         .benefit-icon {
             position: absolute;
             left: 24px;
@@ -978,9 +1098,10 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: url('assets/product-ritual.webp') center bottom / 76% auto no-repeat;
-            opacity: .32;
-            filter: saturate(.9);
+            background:
+                radial-gradient(circle at 45% 38%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 19rem),
+                radial-gradient(circle at 70% 70%, rgba(194, 217, 228, .32), rgba(255, 255, 255, 0) 18rem);
+            opacity: .9;
         }
 
         .product-stage::after {
@@ -997,8 +1118,26 @@
         .product-bottle {
             position: relative;
             z-index: 3;
-            width: min(64%, 360px);
+            width: min(62%, 340px);
+            max-height: 390px;
+            object-fit: contain;
             filter: drop-shadow(0 34px 35px rgba(16, 45, 66, .28));
+            transition: opacity .18s ease, transform .24s ease;
+        }
+
+        .product-bottle.switching {
+            opacity: 0;
+            transform: translateY(10px) scale(.98);
+        }
+
+        .product-stage[data-preview="pack"] .product-bottle {
+            width: min(78%, 420px);
+            max-height: 370px;
+        }
+
+        .product-stage[data-preview="refill"] .product-bottle {
+            width: min(74%, 400px);
+            max-height: 380px;
         }
 
         .seal {
@@ -1029,6 +1168,14 @@
             letter-spacing: .38em;
             font-weight: 900;
             font-size: 11px;
+        }
+
+        .product-signature-logo {
+            display: block;
+            width: min(260px, 48vw);
+            height: auto;
+            margin: 8px 0 18px;
+            mix-blend-mode: multiply;
         }
 
         .product-copy h2 {
@@ -1599,6 +1746,10 @@
                 min-height: auto;
             }
 
+            .hero-photo img {
+                object-position: 66% center;
+            }
+
             .hero-copy {
                 padding-top: 0;
             }
@@ -1681,6 +1832,43 @@
                 grid-template-columns: 1fr;
             }
 
+            .hero {
+                min-height: 760px;
+            }
+
+            .hero::before {
+                background:
+                    linear-gradient(180deg, rgba(255, 255, 255, .82) 0%, rgba(255, 255, 255, .6) 42%, rgba(246, 251, 253, .28) 100%),
+                    linear-gradient(90deg, rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .68) 58%, rgba(255, 255, 255, .06) 100%);
+            }
+
+            .hero-photo img {
+                position: absolute;
+                top: 78px;
+                right: -18px;
+                width: min(230vw, 1060px);
+                max-width: none;
+                height: auto;
+                min-height: 0;
+                object-fit: contain;
+                object-position: right top;
+                opacity: .9;
+            }
+
+            .hero-splash {
+                right: -18px;
+                bottom: 244px;
+                width: 190px;
+                opacity: .48;
+            }
+
+            .hero-lemon-glow {
+                right: 74px;
+                bottom: 298px;
+                width: 96px;
+                opacity: .5;
+            }
+
             .wrap {
                 width: min(100% - 32px, var(--max));
             }
@@ -1742,6 +1930,10 @@
                 min-height: 360px;
             }
 
+            .hero {
+                min-height: 720px;
+            }
+
             .hero-badge,
             .hero-chip {
                 display: none;
@@ -1753,6 +1945,16 @@
 
             .seal {
                 display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .hero-photo img,
+            .hero::after,
+            .hero-splash,
+            .hero-lemon-glow {
+                animation: none;
             }
         }
     </style>
@@ -1789,6 +1991,11 @@
 
     <main>
         <section class="hero" id="home">
+            <div class="hero-photo" aria-hidden="true">
+                <img src="assets/hero-bottle-splash.png" alt="" />
+            </div>
+            <div class="hero-splash" aria-hidden="true"></div>
+            <div class="hero-lemon-glow" aria-hidden="true"></div>
             <div class="hero-grid">
                 <div class="hero-copy reveal show">
                     <p class="eyebrow">Beyond Hydration</p>
@@ -1811,7 +2018,7 @@
                 </div>
                 <div class="hero-art reveal show">
                     <div class="hero-orb"></div>
-                    <img class="hero-ice" src="assets/hero-ice.webp"
+                    <img class="hero-ice" src="assets/hero-bottle-splash.png"
                         alt="OKEARA structured hydrogen water carton on ice" />
                     <div class="hero-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                             <path d="M12 22s7-5.1 7-11.4C19 6.3 16 2.7 12 2 8 2.7 5 6.3 5 10.6 5 16.9 12 22 12 22Z"
@@ -2050,7 +2257,7 @@
 
                     <article class="benefit-row-card reveal">
                         <div class="benefit-media">
-                            <img src="assets/benefit-detox.png" alt="Supporting Natural Pathways" />
+                            <img src="assets/benefit-detox-new.png" alt="Supporting Natural Pathways" />
                             <div class="benefit-icon">☼</div>
                         </div>
                         <div class="benefit-info">
@@ -2069,7 +2276,7 @@
 
                     <article class="benefit-row-card reveal">
                         <div class="benefit-media">
-                            <img src="assets/benefit-recovery.png" alt="Accelerate Muscle Recovery" />
+                            <img src="assets/benefit-recovery-new.png" alt="Accelerate Muscle Recovery" />
                             <div class="benefit-icon">◌</div>
                         </div>
                         <div class="benefit-info">
@@ -2088,7 +2295,8 @@
 
                     <article class="benefit-row-card reveal">
                         <div class="benefit-media">
-                            <img src="assets/benefit-beauty.png" alt="Glowing Skin from Within" />
+                            <img class="beauty-head-safe" src="assets/benefit-beauty-garden.png"
+                                alt="Glowing Skin from Within" />
                             <div class="benefit-icon">✦</div>
                         </div>
                         <div class="benefit-info">
@@ -2145,14 +2353,15 @@
 
         <section class="product" id="product">
             <div class="wrap product-grid">
-                <div class="product-stage reveal">
-                    <img class="product-bottle" src="assets/okeara-product.webp"
+                <div class="product-stage reveal" id="productStage" data-preview="single">
+                    <img class="product-bottle" id="productPreview" src="assets/okeara-product.webp"
                         alt="OKEARA Structured Hydrogen Water 500ml carton" />
                     <div class="seal">Pure hydration<br />for cellular<br />wellness</div>
                 </div>
                 <div class="product-copy reveal">
                     <div class="signature">Our Signature</div>
-                    <h2><img src="assets/okeara-logo.png" alt="OKEARA" style="height:1.8em;width:auto;vertical-align:middle;display:inline-block;margin-bottom:0.1em;" /><br>Structured Hydrogen Water</h2>
+                    <h2><img class="product-signature-logo" src="assets/okeara-logo-wordmark.png"
+                            alt="OKEARA" />Structured Hydrogen Water</h2>
                     <p>Premium structured water with molecular hydrogen for deep hydration, natural detox, and cellular
                         renewal.
                         The product page frames OKEARA as a 500ml x 24 daily hydration format designed for energy,
@@ -2182,12 +2391,18 @@
                             </svg>pH balanced & pure</div>
                     </div>
                     <div class="buy-box">
-                        <label class="option active" data-price="From Rp49.000"><span><i class="radio"></i>One 500ml
+                        <label class="option active" data-price="From Rp49.000" data-preview="single"
+                            data-image="assets/okeara-product.webp"
+                            data-alt="OKEARA Structured Hydrogen Water 500ml carton"><span><i class="radio"></i>One 500ml
                                 ritual
                                 pack</span><span class="price">From Rp49.000</span></label>
-                        <label class="option" data-price="Rp1.176.000"><span><i class="radio"></i>24-pack cellular
+                        <label class="option" data-price="Rp1.176.000" data-preview="pack"
+                            data-image="assets/okeara-24pack.webp"
+                            data-alt="OKEARA Structured Hydrogen Water 24-pack"><span><i class="radio"></i>24-pack cellular
                                 protocol</span><span class="price">Rp1.176.000</span></label>
-                        <label class="option" data-price="Rp450.000"><span><i class="radio"></i>12L home hydration
+                        <label class="option" data-price="Rp450.000" data-preview="refill"
+                            data-image="assets/okeara-12l.webp"
+                            data-alt="OKEARA Structured Hydrogen Water 12L refill"><span><i class="radio"></i>12L home hydration
                                 refill</span><span class="price">Rp450.000</span></label>
                         <div class="buy-footer">
                             <div class="current-price" id="priceDisplay">From Rp49.000</div>
@@ -2436,6 +2651,8 @@
         const cartCount = document.getElementById('cartCount');
         const priceDisplay = document.getElementById('priceDisplay');
         const addToCart = document.getElementById('addToCart');
+        const productStage = document.getElementById('productStage');
+        const productPreview = document.getElementById('productPreview');
 
         function onScroll() {
             header.classList.toggle('scrolled', window.scrollY > 18);
@@ -2458,6 +2675,15 @@
                 document.querySelectorAll('.option').forEach(o => o.classList.remove('active'));
                 option.classList.add('active');
                 priceDisplay.textContent = option.dataset.price;
+                if (productPreview && option.dataset.image) {
+                    productPreview.classList.add('switching');
+                    setTimeout(() => {
+                        productPreview.src = option.dataset.image;
+                        productPreview.alt = option.dataset.alt || 'OKEARA product preview';
+                        productStage?.setAttribute('data-preview', option.dataset.preview || 'single');
+                        productPreview.classList.remove('switching');
+                    }, 120);
+                }
             });
         });
 
