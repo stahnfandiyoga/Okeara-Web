@@ -180,19 +180,14 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            color: var(--navy);
-            letter-spacing: .45em;
-            font-size: 24px;
-            font-weight: 400;
-            line-height: 1;
             white-space: nowrap;
+            flex: 0 0 auto;
         }
 
-        .logo em {
-            font-style: normal;
-            display: inline-block;
-            letter-spacing: .12em;
-            transform: translateY(-1px);
+        .logo img {
+            width: clamp(230px, 24vw, 320px);
+            height: auto;
+            display: block;
         }
 
         .nav-links {
@@ -1766,7 +1761,7 @@
 <body>
     <header class="site-header" id="top">
         <nav class="nav" aria-label="Primary navigation">
-            <a class="logo" href="#home" aria-label="OKEARA home">OK<em>Ξ</em>ARA</a>
+            <a class="logo" href="#home" aria-label="OKEARA home"><img src="assets/okeara-logo-wordmark.png" alt="OKEARA" /></a>
             <div class="nav-links" id="navLinks">
                 <a class="active" href="#home">Home</a>
                 <a href="#protocol">Protocol</a>
@@ -1950,7 +1945,7 @@
                                     <circle cx="66" cy="141" r="6" />
                                 </g>
                             </svg>
-                            <h3>OKEARA Structured Water</h3>
+                            <h3><img src="assets/okeara-logo.png" alt="OKEARA" style="height:2.2em;width:auto;vertical-align:middle;display:inline-block;" /> Structured Water</h3>
                             <ul>
                                 <li>Organized hexagonal structure</li>
                                 <li>Absorbed efficiently</li>
@@ -2157,7 +2152,7 @@
                 </div>
                 <div class="product-copy reveal">
                     <div class="signature">Our Signature</div>
-                    <h2>OKEARA Structured Hydrogen Water</h2>
+                    <h2><img src="assets/okeara-logo.png" alt="OKEARA" style="height:1.8em;width:auto;vertical-align:middle;display:inline-block;margin-bottom:0.1em;" /><br>Structured Hydrogen Water</h2>
                     <p>Premium structured water with molecular hydrogen for deep hydration, natural detox, and cellular
                         renewal.
                         The product page frames OKEARA as a 500ml x 24 daily hydration format designed for energy,
@@ -2402,7 +2397,7 @@
         <div class="wrap">
             <div class="footer-grid">
                 <div>
-                    <a class="logo" href="#home">OK<em>Ξ</em>ARA</a>
+                    <a class="logo" href="#home"><img src="assets/okeara-logo-wordmark.png" alt="OKEARA" /></a>
                     <p>Structured hydration for cellular wellness. Designed by nature. Delivered for you.</p>
                 </div>
                 <div>
